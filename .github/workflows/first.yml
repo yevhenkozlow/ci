@@ -1,0 +1,28 @@
+name: first
+
+on:
+  push:
+    branches: 
+    - '*'
+    - '!main'
+
+jobs:
+ firstworkflow:
+  runs-on: ubuntu-20.04
+  
+  steps:
+  # step 1
+  - name: pulling_image
+    run: docker pull eugene191/flask32
+  # step 2
+  - name: login_to_dockerhub
+    uses: docker/login-action@v2
+    with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  # step 3  
+  - name: build_and_push
+    uses: docker/build-push-action@v3
+    with:
+          push: true
+          tags: user/app:latest
