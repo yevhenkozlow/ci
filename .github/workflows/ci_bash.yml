@@ -5,7 +5,7 @@ on:
   push:
     branches: 
       - '*'
-      - '!main'
+      - 'main'
 jobs:
   pushing_to_docker:
      runs-on: ubuntu-latest
