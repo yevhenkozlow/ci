@@ -19,7 +19,7 @@ jobs:
     with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-  # step 3  
+
   - name: build_and_push
     uses: docker/build-push-action@v3
     with:
