@@ -1,19 +1,29 @@
-# letter i have to add branches. Mabe I can use branches-ignore
+# letter i have to add branches. Maybe I can use branches-ignore
 name: ci_bash
 
 on:
   push:
-    # branches: 
-    # branches-ignore: 
+    branches: 
+      - '*'
+      - 'main'
 jobs:
   pushing_to_docker:
      runs-on: ubuntu-latest
      steps:
-       - name: pulling-image
-         run: docker pull eugene191/flask32
-       - name: runing_cont
-         run: docker run -d eugene191/flask32
-       - name: commit_tag
-         run: |
-               docker stop $(docker ps -a -q)
- 
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: build
+        run: docker build .
+        
+      - name: tag
+        run: docker tag eugene191/flask32 mydockerhubflask:12
+        
+      - name: login
+        uses: docker/login-action@v2
+        with:
+         username: ${{ secrets.DOCKERHUB_USERNAME }}
+         password: ${{ secrets.DOCKERHUB_TOKEN }}
+         
+      - name: push
+        run: docker push mydockerhubflask:12
