@@ -5,7 +5,7 @@ on:
    branches: 
     - '*'
     - 'main'
-   
+    
 jobs:
  firstworkflow:
   runs-on: ubuntu-20.04
