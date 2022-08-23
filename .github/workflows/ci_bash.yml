@@ -18,7 +18,7 @@ jobs:
         run: docker build .
         
       - name: tag
-        run: docker tag eugene191/flask32 eugene191/mydockerhubflask
+        run: docker tag eugene191/flask32 eugene191/mydockerhubflask:${{ github.sha }}
         
       - name: login
         uses: docker/login-action@v2
