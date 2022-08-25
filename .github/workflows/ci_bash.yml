@@ -26,4 +26,4 @@ jobs:
          password: ${{ secrets.DOCKERHUB_TOKEN }}
          
       - name: push
-        run: docker push eugene191/mydockerhubflask:${{ github.sha | cut -c1-8 }}
+        run: docker push eugene191/mydockerhubflask:${{ github.sha }}
