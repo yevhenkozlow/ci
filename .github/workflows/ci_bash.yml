@@ -1,6 +1,6 @@
 name: ci_bash
 env:
-  br: "$github.sha | cut -c1-4"
+  br: "$github.sha"
 
 on:
   push:
