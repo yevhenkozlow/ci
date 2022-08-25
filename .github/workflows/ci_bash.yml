@@ -15,11 +15,22 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+        with:
+          length: 4
+      - run: echo $SHA
+        env: 
+          SHA: ${{ steps.short-sha.outputs.sha }}
+      - run: echo $SHA
+        env: 
+          SHA: ${{ env.SHA }}
+        
       - name: build
         run: docker build .
         
       - name: tag
-        run: docker tag eugene191/flask32 eugene191/mydockerhubflask:${{ env.br }}"
+        run: docker tag eugene191/flask32 eugene191/mydockerhubflask:${{ env.SHA }}
         
       - name: login
         uses: docker/login-action@v2
@@ -28,4 +39,4 @@ jobs:
          password: ${{ secrets.DOCKERHUB_TOKEN }}
          
       - name: push
-        run: docker push eugene191/mydockerhubflask:${{ env.br }}"
+        run: docker push eugene191/mydockerhubflask:${{ env.SHA }}
