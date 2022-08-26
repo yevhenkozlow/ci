@@ -1,10 +1,10 @@
-name: ci_bash
+name: ci_bash_short
 
 on:
   push:
     branches: 
       - '*'
-      - '!main'
+      - 'main'
       
 jobs:
   pushing_to_docker:
